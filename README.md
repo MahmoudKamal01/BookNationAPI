@@ -1,4 +1,3 @@
-# BookNationAPI
 # BookNation API
 
 BookNation API is a RESTful API that allows users to browse and search for books, view book details such as titles, descriptions, release dates, and user reviews, and more. Built using the MVC architecture, BookNation API provides a flexible and scalable solution for managing and organizing book data.
