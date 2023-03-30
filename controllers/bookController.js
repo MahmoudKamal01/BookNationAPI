@@ -32,4 +32,4 @@ const deleteBook = async(req,res)=>{
 
 
 
-module.exports = {createBook,deleteBook};
+module.exports = {createBook,deleteBook, getAllBooks};
