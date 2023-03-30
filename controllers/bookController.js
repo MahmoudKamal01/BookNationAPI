@@ -1,5 +1,15 @@
 const {Book} = require('../models/book.js');
 
+const getAllBooks = async(req,res)=>{
+    try {
+        //getting all Books
+        const books = await Book.find();
+        res.status(201).send(books);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+}
+
 const createBook = async(req,res)=>{
     try {
         //creating Book
