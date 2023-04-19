@@ -34,15 +34,22 @@ const getBook = async(req,res)=>{
     }
 }
 
-const createBook = async(req,res)=>{
-    try {
-        //creating Book
-        const book = await Book.create(req.body);
-        res.status(201).send(book);
-    } catch (error) {
-        res.status(400).send(error);
+const createBook = async (req, res) => {
+  try {
+    //creating Book
+    const validationResult = validateBook(req.body);
+    if (validationResult.error) {
+      // Validation failed
+      const validationErrorMessage = validationResult.error.details[0].message;
+      console.log(validationErrorMessage);
+      return res.status(400).send(validationErrorMessage);
     }
-}
+    const book = await Book.create(req.body);
+    res.status(201).send(book);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 
 const editBook = async(req,res)=>{
     const id = req.params.id;
