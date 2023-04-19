@@ -20,6 +20,40 @@ const getReview = async (req, res) => {
   }
 };
 
+const createReview = async (req, res) => {
+  try {
+    // Creating review
+    const bookId = req.params.bookId;
+    const book = await Book.findById(bookId);
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+    const validationResult = validateReview(req.body);
+    if (validationResult.error) {
+      // Validation failed
+      const validationErrorMessage = validationResult.error.details[0].message;
+      console.log(validationErrorMessage);
+      return res.status(400).send(validationErrorMessage);
+    }
+
+    const review = new Review({
+      userName: req.body.userName,
+      comment: req.body.comment,
+      rating: req.body.rating,
+    });
+
+    review.book = book._id; // Link review to book by reference
+    await review.save();
+
+    book.reviews.push(review._id);
+    await book.save();
+
+    res.status(201).send(review);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 const editReview = async (req, res) => {
   const id = req.params.id;
   try {
@@ -32,4 +66,5 @@ const editReview = async (req, res) => {
 
 module.exports = {
   getAllReviews,
+  createReview,
 };
