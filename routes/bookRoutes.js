@@ -3,8 +3,8 @@ const bookRouter = Router()
 
 const bookController = require('../controllers/bookController.js');
 
-bookRouter.route('/').post(bookController.createBook);
-bookRouter.route('/:id').delete(bookController.deleteBook);
+bookRouter.route('/').get(bookController.getAllBooks).post(bookController.createBook);
+bookRouter.route('/:id').get(bookController.getBook).put(bookController.editBook).delete(bookController.deleteBook);
 
 
 module.exports = {

@@ -13,6 +13,17 @@ function validateBook(book) {
     return schema.validate(book);
 }
 
+function validateReview(review) {
+  const schema = Joi.object({
+    userName: Joi.string().min(3).required(),
+    comment: Joi.string().min(3).required(),
+    rating: Joi.number().min(0).max(10).required(),
+  });
+
+  return schema.validate(review);
+}
+
 module.exports = {
     validateBook,
+    validateReview,
 };
