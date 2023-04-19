@@ -10,6 +10,17 @@ const getAllReviews = async (req, res) => {
   }
 };
 
+const getReview = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const review = await Review.findById(id);
+    res.status(201).send(review);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+
 module.exports = {
   getAllReviews,
 };
