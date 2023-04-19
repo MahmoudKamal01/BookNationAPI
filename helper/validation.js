@@ -14,5 +14,5 @@ function validateBook(book) {
 }
 
 module.exports = {
-    validateBook,
+    validateBook
 };
