@@ -79,4 +79,5 @@ module.exports = {
   getReview,
   editReview,
   deleteReview,
+  createReview
 };
