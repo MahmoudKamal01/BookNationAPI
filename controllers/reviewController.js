@@ -64,7 +64,18 @@ const editReview = async (req, res) => {
   }
 };
 
+const deleteReview = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const review = await Review.findByIdAndDelete(id);
+    res.status(200).send("Review deleted!");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 module.exports = {
   getAllReviews,
   createReview,
+  deleteReview,
 };
