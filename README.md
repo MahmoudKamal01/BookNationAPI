@@ -21,11 +21,11 @@ BookNation API is built using the following technologies:
 
 BookNation API provides the following endpoints:
 
-- `POST /bookRouter`: Adds a new book to the database.
-- `GET /bookRouter`: Returns a list of all books in the database.
-- `GET /bookRouter/:id`: Returns the details of a specific book based on its ID.
-- `PUT /bookRouter/:id`: Updates the details of a specific book based on its ID.
-- `DELETE /bookRouter/:id`: Delete a specific book based on its ID.
+- `POST /api/books/`: Adds a new book to the database.
+- `GET /api/books/`: Returns a list of all books in the database.
+- `GET /api/books/:id`: Returns the details of a specific book based on its ID.
+- `PUT /api/books/:id`: Updates the details of a specific book based on its ID.
+- `DELETE /api/books/:id`: Delete a specific book based on its ID.
 
 ## Team Members:
 
