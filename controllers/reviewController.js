@@ -32,4 +32,6 @@ const editReview = async (req, res) => {
 
 module.exports = {
   getAllReviews,
+  getReview,
+  editReview,
 };
