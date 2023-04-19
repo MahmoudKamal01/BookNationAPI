@@ -1,14 +1,28 @@
 const {Book} = require('../models/book.js');
 
-const getAllBooks = async(req,res)=>{
-    try {
-        //getting all Books
-        const books = await Book.find();
-        res.status(201).send(books);
-    } catch (error) {
-        res.status(400).send(error);
+const getAllBooks = async (req, res) => {
+  try {
+    const title = req.query.title;
+    const author = req.query.author;
+    const sortBy = req.query.sortBy; // New: Get the sortBy query parameter
+    const sortOrder = req.query.sortOrder || 1; // New: Get the sortOrder query parameter or default to 1
+
+    // Construct the query object based on title and author query parameters
+    const query = {};
+    if (title) {
+      query.title = { $regex: title, $options: "i" };
     }
-}
+    if (author) {
+      query.author = { $regex: author, $options: "i" };
+    }
+
+    // Use the query object to search books and sort based on sortBy and sortOrder
+    const books = await Book.find(query).sort({ [sortBy]: sortOrder });
+    res.status(201).send(books);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 
 const getBook = async(req,res)=>{
     const id = req.params.id;
