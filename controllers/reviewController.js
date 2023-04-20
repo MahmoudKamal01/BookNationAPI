@@ -1,10 +1,18 @@
 const { Review } = require("../models/review.js");
+const { Book } = require("../models/book.js");
+const { validateReview } = require("../helper/validation.js");
 
 const getAllReviews = async (req, res) => {
   try {
     // Getting all reviews
-    const reviews = await Review.find();
-    res.status(201).send(reviews);
+    const bookId = req.params.bookId;
+    const book = await Book.findById(bookId);
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+    const reviews = await book.populate("reviews");
+    const reviews_res = reviews.reviews;
+    res.status(201).send(reviews_res);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -79,5 +87,5 @@ module.exports = {
   getReview,
   editReview,
   deleteReview,
-  createReview
+  createReview,
 };
